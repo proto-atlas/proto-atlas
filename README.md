@@ -1,29 +1,31 @@
 # proto-atlas
 
-TypeScript / React / Cloudflare Workers を中心に、AI / LLM を組み込んだWebアプリケーションや、開発中の挙動を後から確認するための小さなツールを作っています。
+AI/LLMを組み込んだWebアプリケーションを開発しています。TypeScript/React/FastAPIを中心に、フロントエンドからサーバーサイドまでフルスタックで作ります。
+会計・財務の学習背景があり、経理・会計領域のAI自動化にも取り組んでいます。
+AIを使うときは、出力を検証し、人が確認してから確定する、という信頼性を意識した設計を大事にしています。
 
-画面実装では、検索、一覧、フォーム、ストリーミング表示、根拠表示、エラー時の表示など、利用者が操作する部分の分かりやすさを重視しています。AI / LLMを使う機能では、回答結果をその場限りにせず、引用、判定条件、検証記録、再実行できるテストと合わせて確認できる形にしています。
+## 主なプロジェクト
 
-## 主な技術
+- **keiriflow-ai**：請求書・領収書をAIで読み取り、仕訳候補の生成から警告・承認・監査ログ・CSV出力までを、人が承認してから確定する会計AIワークフロー。AI出力はZodで検証し、書き込みは承認後に限定、APIコストも制御。
+- **rag-knowledge-assistant**：文書を検索して根拠付きで回答するRAGアプリ。該当文書が無いときは答えない制御、SSEでの逐次配信を実装。
+- **medical-extractor**：tool_use（Function Calling）とZodの二重検証で、文書を構造化データに抽出。
+- **saleslog**：React+FastAPIのフルスタックCRM。ロール別認可、AIの下書きを人が承認してから確定するワークフロー、pytest/Vitest/Playwrightとカバレッジしきい値、CI。
 
-TypeScript / JavaScript / React / Next.js / Vue / Nuxt / Tailwind CSS  
-Cloudflare Workers / Durable Objects / KV / D1 / Vectorize / Supabase  
-Python / FastAPI / SQLAlchemy / Pydantic / SQLite  
-Playwright / Vitest / node:test / pytest / ruff / mypy / GitHub Actions  
-Anthropic API / OpenAI API / Workers AI / RAG / SSE
+## 技術スタック
 
-## 作っているもの
+- **フロントエンド**：TypeScript/React/Next.js/Vue/Nuxt/Tailwind CSS
+- **バックエンド・インフラ**：Python/FastAPI/SQLAlchemy、Cloudflare Workers/Durable Objects/D1/KV/Vectorize、Supabase
+- **AI・LLM**：Anthropic API/OpenAI API/Workers AI、RAG、tool_use（Function Calling）、構造化出力、SSE
+- **品質**：TypeScript strict/Zod/pytest/Vitest/Playwright/ruff/mypy/GitHub Actions
 
-- React / TypeScript を使ったWebアプリケーション
-- Cloudflare Workers を使ったAPIと公開デモ
-- RAG、引用付き回答、構造化出力を扱うAI / LLM機能
-- SSEストリームやLLM回答を後から確認するためのローカルツール
-- テスト、検証記録、README、docsを含めた再確認しやすい開発資料
+## 大事にしていること
 
-## 補足
+- AIの出力をそのまま確定させず、検証（Zodスキーマ）と人の承認をはさむ設計にする
+- 型安全とテストで、フロントエンドとサーバーサイドの両方の挙動を確かめる
+- 公開デモではコストと権限を制御し、確認した範囲・していない範囲をREADMEと検証記録で追えるようにする
 
-一部のlive AI / live RAG / 変更系APIは、コスト管理と乱用防止のため確認用access keyで保護しています。公開URLでは、キーなしで確認できる範囲、スクリーンショット、README、設計資料、検証記録を確認できます。
+## リンク
 
-## Interests
-
-フロントエンド開発、AI / LLMを活用したWebアプリ開発、RAG、引用付き回答、構造化出力、Cloudflare Workersを使った軽量な公開環境に関心があります。
+- saleslog（合成データのUIデモ）：https://saleslog-demo.pages.dev/
+- crypto-realtime-dashboard（デモ）：https://crypto-realtime-dashboard.pages.dev
+- keiriflow-ai（閲覧は公開・操作はキー制）：https://keiriflow-ai.atlas-lab.workers.dev
